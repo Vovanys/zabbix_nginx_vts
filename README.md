@@ -31,3 +31,6 @@ UserParameter=nginx.discovery[*],/etc/zabbix/scripts/nginx-discovery.py $1
 присоединить шаблон Nginx VTS к узлу сети
 
 проверить наличие свежих данных
+
+
+<img src="https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/lastdata.jpg?raw=true">
