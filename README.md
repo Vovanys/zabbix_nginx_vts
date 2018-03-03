@@ -1,36 +1,29 @@
 # zabbix_nginx_vts
 Скрипты мониторинга zabbix для nginx-module-vts
 
-<b>Требования</b>
+**Требования**
 
-
-<a href="https://nginx.org/ru/">nginx</a> и установленный модуль <a href="https://github.com/vozlt/nginx-module-vts">#nginx-module-vts</a> 
-
-
-
-Скрипты переделаны из скриптов для NGINX PLUS <a href="https://github.com/strannick-ru/nginx-plus-zabbix">nginx-plus-zabbix</a>, что-то добавлено, что-то сломано))
-
-<b>Установка</b>
-
-Добавить в 
-
-/etc/zabbix/zabbix_agentd.d/userparameter_nginx_vts.conf
+[nginx](https://nginx.org/ru/) и установленный модуль [nginx-module-vts](https://github.com/vozlt/nginx-module-vts)
 
 
 
-<code>
-UserParameter=nginx.stat.[*],/etc/zabbix/scripts/nginx-stats.py $1 $2 $3 $4 $5 $6 $7
-UserParameter=nginx.discovery[*],/etc/zabbix/scripts/nginx-discovery.py $1
-</code>
+Скрипты переделаны из скриптов для NGINX PLUS [nginx-plus-zabbix](https://github.com/strannick-ru/nginx-plus-zabbix), что-то добавлено, что-то сломано :) т.к. plus более умный и дает больше данных.
+Добавлено поиск серверов и их статистика, т.к. изначальный скрипт искал только апстримы. 
 
+**Установка**
 
-перезапустить zabbix-agent
+ 1. Добавить в /etc/zabbix/zabbix_agentd.d/userparameter_nginx_vts.conf
 
-импортировать шаблон Zabbix
+    UserParameter=nginx.stat.[*],/etc/zabbix/scripts/nginx-stats.py $1 $2 $3 $4 $5 $6 $7
+    UserParameter=nginx.discovery[*],/etc/zabbix/scripts/nginx-discovery.py $1
 
-присоединить шаблон Nginx VTS к узлу сети
+ 2. Перезапустить zabbix-agent
+ 3. Импортировать шаблон Zabbix
+ 4. Добавить в host макрос указывающий путь к url status {$URL_VTS_STATUS}
+![macros](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/macros.jpg?raw=true)
+ 5. Присоединить шаблон Nginx VTS к узлу сети
+ 6. Проверить наличие свежих данных
 
-проверить наличие свежих данных
+![lastdata](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/lastdata.jpg?raw=true)
 
-
-<img src="https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/lastdata.jpg?raw=true">
+![discovery](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/discovery.jpg?raw=true)
