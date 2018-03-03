@@ -29,3 +29,6 @@
 ![lastdata](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/lastdata.jpg?raw=true)
 
 ![discovery](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/discovery.jpg?raw=true)
+
+
+Распространяется как есть.
