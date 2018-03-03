@@ -19,7 +19,9 @@
 
  2. Перезапустить zabbix-agent
  3. Импортировать шаблон Zabbix
- 4. Добавить в host макрос указывающий путь к url status {$URL_VTS_STATUS}
+ 4. Добавить в host макрос указывающий путь к url status  в формате json (!!!)
+ {$URL_VTS_STATUS} например https://site.com/status/format/json
+ 
 ![macros](https://github.com/Vovanys/zabbix_nginx_vts/blob/master/img/macros.jpg?raw=true)
  5. Присоединить шаблон Nginx VTS к узлу сети
  6. Проверить наличие свежих данных
