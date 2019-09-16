@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.4</version>
-    <date>2018-03-02T18:03:16Z</date>
+    <version>4.2</version>
+    <date>2019-09-16T12:50:17Z</date>
     <groups>
         <group>
-            <name>Nginx</name>
+            <name>Templates/Applications</name>
+        </group>
+        <group>
+            <name>Templates/Web</name>
         </group>
     </groups>
     <templates>
         <template>
-            <template>Nginx VTS</template>
-            <name>Nginx VTS</name>
+            <template>Template Nginx VTS module</template>
+            <name>Template Nginx VTS module</name>
             <description>Template for Nginx Vhost Traffic Status</description>
             <groups>
                 <group>
-                    <name>Nginx</name>
+                    <name>Templates/Applications</name>
+                </group>
+                <group>
+                    <name>Templates/Web</name>
                 </group>
             </groups>
             <applications>
@@ -25,11 +31,11 @@
             <items>
                 <item>
                     <name>Nginx active connections</name>
-                    <type>7</type>
+                    <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>nginx.stat.[{$URL_VTS_STATUS},connections,active]</key>
-                    <delay>60</delay>
+                    <key>nginx.stat[connections,active]</key>
+                    <delay>0</delay>
                     <history>90d</history>
                     <trends>365d</trends>
                     <status>0</status>
@@ -60,17 +66,44 @@
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
-                    <preprocessing/>
+                    <preprocessing>
+                        <step>
+                            <type>12</type>
+                            <params>$.['connections'].['active']</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
+                        </step>
+                    </preprocessing>
                     <jmx_endpoint/>
-                    <master_item/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item>
+                        <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                    </master_item>
                 </item>
                 <item>
                     <name>Nginx current requests</name>
-                    <type>7</type>
+                    <type>18</type>
                     <snmp_community/>
                     <snmp_oid/>
-                    <key>nginx.stat.[{$URL_VTS_STATUS},connections,requests]</key>
-                    <delay>60</delay>
+                    <key>nginx.stat[connections,requests]</key>
+                    <delay>0</delay>
                     <history>90d</history>
                     <trends>365d</trends>
                     <status>0</status>
@@ -101,15 +134,106 @@
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
+                    <preprocessing>
+                        <step>
+                            <type>12</type>
+                            <params>$.['connections'].['requests']</params>
+                            <error_handler>0</error_handler>
+                            <error_handler_params/>
+                        </step>
+                    </preprocessing>
+                    <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <master_item>
+                        <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                    </master_item>
+                </item>
+                <item>
+                    <name>Nginx total info</name>
+                    <type>19</type>
+                    <snmp_community/>
+                    <snmp_oid/>
+                    <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                    <delay>30s</delay>
+                    <history>90d</history>
+                    <trends>0</trends>
+                    <status>0</status>
+                    <value_type>4</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>Nginx</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
                     <preprocessing/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url>{$URL_VTS_STATUS}</url>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/json</value>
+                        </header>
+                    </headers>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <output_format>0</output_format>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
                     <master_item/>
                 </item>
             </items>
             <discovery_rules>
                 <discovery_rule>
                     <name>Nginx-discovery</name>
-                    <type>7</type>
+                    <type>0</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>nginx.discovery[{$URL_VTS_STATUS}]</key>
@@ -141,11 +265,11 @@
                     <item_prototypes>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} requests per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},requests]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},requests]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -176,18 +300,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].{#UPSTREAM}.[?(@.server=&quot;{#NODE_IP}&quot;)].requestMsec</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} responses 1XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,1xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,1xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -218,18 +369,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].[?(@.server=&quot;{#NODE_IP}&quot;)].['responses'].['1xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} responses 2XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -260,18 +438,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].{#UPSTREAM}.[?(@.server=&quot;{#NODE_IP}&quot;)].['responses'].['2xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} responses 3XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,3xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,3xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -302,18 +507,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].{#UPSTREAM}.[?(@.server=&quot;{#NODE_IP}&quot;)].['responses'].['3xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} responses 4XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -344,18 +576,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].{#UPSTREAM}.[?(@.server=&quot;{#NODE_IP}&quot;)].['responses'].['4xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} {#NODE_IP} responses 5XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -386,18 +645,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].{#UPSTREAM}.[?(@.server=&quot;{#NODE_IP}&quot;)].['responses'].['5xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} active connections</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},requests]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},requests]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -428,18 +714,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['requestMsec']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} responses 1XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,1xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},responses,1xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -470,18 +796,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['responses'].['1xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} responses 2XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,2xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},responses,2xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -512,18 +878,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['responses'].['2xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} responses 3XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,3xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},responses,3xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -554,18 +960,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['responses'].['3xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} responses 4XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,4xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},responses,4xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -596,18 +1042,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['responses'].['4xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#UPSTREAM} responses 5XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,5xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[upstreams,{#UPSTREAM},responses,5xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -638,18 +1124,58 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['upstreamZones'].['{#UPSTREAM}'].*.['responses'].['5xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                                <step>
+                                    <type>21</type>
+                                    <params>value = JSON.parse(value);
+
+var sum = 0;
+for (var i = 0; i &lt; value.length; i +=1) {
+  sum += value[i];
+}
+
+return sum;</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE} active connections</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},requests]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},requests]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -680,18 +1206,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['requestMsec']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE} responses 1XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,1xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},responses,1xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -722,18 +1275,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['responses'].['1xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE} responses 2XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,2xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},responses,2xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -764,18 +1344,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['responses'].['2xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE}  responses 3XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,3xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},responses,3xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -806,18 +1413,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['responses'].['3xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE}  responses 4XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,4xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},responses,4xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -848,18 +1482,45 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['responses'].['4xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                         <item_prototype>
                             <name>{#ZONE}  responses 5XX per min</name>
-                            <type>7</type>
+                            <type>18</type>
                             <snmp_community/>
                             <snmp_oid/>
-                            <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,5xx]</key>
-                            <delay>60</delay>
+                            <key>nginx.stat[zones,{#ZONE},responses,5xx]</key>
+                            <delay>0</delay>
                             <history>90d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -890,15 +1551,42 @@
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
-                            <preprocessing/>
+                            <preprocessing>
+                                <step>
+                                    <type>12</type>
+                                    <params>$.['serverZones'].['{#ZONE}'].['responses'].['5xx']</params>
+                                    <error_handler>0</error_handler>
+                                    <error_handler_params/>
+                                </step>
+                            </preprocessing>
                             <jmx_endpoint/>
+                            <timeout>3s</timeout>
+                            <url/>
+                            <query_fields/>
+                            <posts/>
+                            <status_codes>200</status_codes>
+                            <follow_redirects>1</follow_redirects>
+                            <post_type>0</post_type>
+                            <http_proxy/>
+                            <headers/>
+                            <retrieve_mode>0</retrieve_mode>
+                            <request_method>0</request_method>
+                            <output_format>0</output_format>
+                            <allow_traps>0</allow_traps>
+                            <ssl_cert_file/>
+                            <ssl_key_file/>
+                            <ssl_key_password/>
+                            <verify_peer>0</verify_peer>
+                            <verify_host>0</verify_host>
                             <application_prototypes/>
-                            <master_item_prototype/>
+                            <master_item>
+                                <key>nginx.stat[{$URL_VTS_STATUS}]</key>
+                            </master_item>
                         </item_prototype>
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>({Nginx VTS:nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx].sum(#20)}+{Nginx VTS:nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx].sum(#20)})&gt;{Nginx VTS:nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx].sum(#20)}</expression>
+                            <expression>({Template Nginx VTS module:nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx].sum(#20)}+{Template Nginx VTS module:nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx].sum(#20)})&gt;{Template Nginx VTS module:nginx.stat[upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx].sum(#20)}</expression>
                             <recovery_mode>0</recovery_mode>
                             <recovery_expression/>
                             <name>{HOST.NAME} {#UPSTREAM} {#NODE_IP} responses check</name>
@@ -941,8 +1629,8 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Nginx VTS</host>
-                                        <key>nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},requests]</key>
+                                        <host>Template Nginx VTS module</host>
+                                        <key>nginx.stat[upstreams,{#UPSTREAM},requests]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -973,8 +1661,8 @@
                                     <calc_fnc>2</calc_fnc>
                                     <type>0</type>
                                     <item>
-                                        <host>Nginx VTS</host>
-                                        <key>nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},requests]</key>
+                                        <host>Template Nginx VTS module</host>
+                                        <key>nginx.stat[zones,{#ZONE},requests]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -982,12 +1670,33 @@
                     </graph_prototypes>
                     <host_prototypes/>
                     <jmx_endpoint/>
+                    <timeout>3s</timeout>
+                    <url/>
+                    <query_fields/>
+                    <posts/>
+                    <status_codes>200</status_codes>
+                    <follow_redirects>1</follow_redirects>
+                    <post_type>0</post_type>
+                    <http_proxy/>
+                    <headers/>
+                    <retrieve_mode>0</retrieve_mode>
+                    <request_method>0</request_method>
+                    <allow_traps>0</allow_traps>
+                    <ssl_cert_file/>
+                    <ssl_key_file/>
+                    <ssl_key_password/>
+                    <verify_peer>0</verify_peer>
+                    <verify_host>0</verify_host>
+                    <lld_macro_paths/>
+                    <preprocessing/>
+                    <master_item/>
                 </discovery_rule>
             </discovery_rules>
             <httptests/>
             <macros/>
             <templates/>
             <screens/>
+            <tags/>
         </template>
     </templates>
     <graphs>
@@ -1017,8 +1726,8 @@
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Nginx VTS</host>
-                        <key>nginx.stat.[{$URL_VTS_STATUS},connections,active]</key>
+                        <host>Template Nginx VTS module</host>
+                        <key>nginx.stat[connections,active]</key>
                     </item>
                 </graph_item>
                 <graph_item>
@@ -1029,8 +1738,8 @@
                     <calc_fnc>2</calc_fnc>
                     <type>0</type>
                     <item>
-                        <host>Nginx VTS</host>
-                        <key>nginx.stat.[{$URL_VTS_STATUS},connections,requests]</key>
+                        <host>Template Nginx VTS module</host>
+                        <key>nginx.stat[connections,requests]</key>
                     </item>
                 </graph_item>
             </graph_items>
