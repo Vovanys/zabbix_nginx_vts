@@ -1,0 +1,248 @@
+zabbix_export:
+  version: '5.4'
+  date: '2022-11-11T10:17:48Z'
+  groups:
+    -
+      uuid: 62e0b5b350c943d2819aa801d9442ba9
+      name: Nginx
+  templates:
+    -
+      uuid: 6810132bda4c4163b4b85197601da898
+      template: 'Nginx VTS'
+      name: 'Nginx VTS'
+      description: 'Template for Nginx Vhost Traffic Status'
+      groups:
+        -
+          name: Nginx
+      items:
+        -
+          uuid: 22cdd9ab85504674baa43c0069b5b93c
+          name: 'Nginx active connections'
+          key: 'nginx.stat.[{$URL_VTS_STATUS},connections,active]'
+          delay: '60'
+          tags:
+            -
+              tag: Application
+              value: Nginx
+        -
+          uuid: 3604b5f653414c218e8aee73d67b4779
+          name: 'Nginx current requests'
+          key: 'nginx.stat.[{$URL_VTS_STATUS},connections,requests]'
+          delay: '60'
+          tags:
+            -
+              tag: Application
+              value: Nginx
+      discovery_rules:
+        -
+          uuid: a25a78e513504afd94d6529a1c603f61
+          name: Nginx-discovery
+          key: 'nginx.discovery[{$URL_VTS_STATUS}]'
+          delay: '600'
+          lifetime: '0'
+          item_prototypes:
+            -
+              uuid: 715fd5c034e94b969b75f172fb742729
+              name: '{#UPSTREAM} {#NODE_IP} requests per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},requests]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 0ff0bff0552140b7a87a9c3f6498a2e6
+              name: '{#UPSTREAM} {#NODE_IP} responses 1XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,1xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 85a06c4247bd446481e6f55087685b13
+              name: '{#UPSTREAM} {#NODE_IP} responses 2XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: a18d006e5f0e4e0dbb329b0ee979e875
+              name: '{#UPSTREAM} {#NODE_IP} responses 3XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,3xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 5dd0f794a5024c499e74394919a8ec30
+              name: '{#UPSTREAM} {#NODE_IP} responses 4XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 6c12aebfe3a14b4784a6095ebe4431c9
+              name: '{#UPSTREAM} {#NODE_IP} responses 5XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 8de6d90188734cfcb9b81edadb571c58
+              name: '{#UPSTREAM} active connections'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},requests]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: fb97efccfe1e4c05a37685a6dd189253
+              name: '{#UPSTREAM} responses 1XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,1xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: c3ccd5ffc0cd4216a9b95e9ac7d2462a
+              name: '{#UPSTREAM} responses 2XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,2xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: b4501d028da44cf3adf8baa62da29b3d
+              name: '{#UPSTREAM} responses 3XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,3xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: a4d52ef99f7b4f8ba3ed2fd2faec6d79
+              name: '{#UPSTREAM} responses 4XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,4xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 48157d91cd4f4aa4a83d706011ed2f8a
+              name: '{#UPSTREAM} responses 5XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},responses,5xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 1683e6baf6ac41f9b14a128aa33f5fb3
+              name: '{#ZONE} active connections'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},requests]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 408e11af41434ebd9b2930a342688d6b
+              name: '{#ZONE} responses 1XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,1xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 84130a803f2a490395877a594d9164e4
+              name: '{#ZONE} responses 2XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,2xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: c620416b354d4f0b91ea7be8e173ca55
+              name: '{#ZONE}  responses 3XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,3xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 1fa221f189044bed958d240b9172f7d7
+              name: '{#ZONE}  responses 4XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,4xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+            -
+              uuid: 9d469e3a23614251a77357a09b35595c
+              name: '{#ZONE}  responses 5XX per min'
+              key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},responses,5xx]'
+              delay: '60'
+              tags:
+                -
+                  tag: Application
+                  value: Nginx
+          trigger_prototypes:
+            -
+              uuid: 9c3b9d69b8844736b2618c52fa6c5d76
+              expression: '(sum(/Nginx VTS/nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,4xx],#20)+sum(/Nginx VTS/nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,5xx],#20))>sum(/Nginx VTS/nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},peers,{#NODE_IP},responses,2xx],#20)'
+              name: '{HOST.NAME} {#UPSTREAM} {#NODE_IP} responses check'
+              status: DISABLED
+              priority: WARNING
+              description: 'Sum of responses with 5xx and 4xx codes more then 2xx codes.'
+          graph_prototypes:
+            -
+              uuid: 401c24dfad3f44d4b33813b0d6845f62
+              name: '{#UPSTREAM} active connections'
+              graph_items:
+                -
+                  color: 1A7C11
+                  item:
+                    host: 'Nginx VTS'
+                    key: 'nginx.stat.[{$URL_VTS_STATUS},upstreams,{#UPSTREAM},requests]'
+            -
+              uuid: 10e099673044477aaafa370d0f24a85a
+              name: '{#ZONE} active connections'
+              graph_items:
+                -
+                  color: 1A7C11
+                  item:
+                    host: 'Nginx VTS'
+                    key: 'nginx.stat.[{$URL_VTS_STATUS},zones,{#ZONE},requests]'
+  graphs:
+    -
+      uuid: 466aa68f24454aa5868a91b42c03ad63
+      name: 'Nginx connections and requests'
+      graph_items:
+        -
+          color: 1A7C11
+          item:
+            host: 'Nginx VTS'
+            key: 'nginx.stat.[{$URL_VTS_STATUS},connections,active]'
+        -
+          sortorder: '1'
+          color: F63100
+          item:
+            host: 'Nginx VTS'
+            key: 'nginx.stat.[{$URL_VTS_STATUS},connections,requests]'
